@@ -1,15 +1,19 @@
 import express from "express";
-import noteRoutes from "./routes/notes.routes.js";
 import dotenv from "dotenv";
-import connectDB from "./config/db.js";
-dotenv.config();
+import cors from "cors";
 
+import noteRoutes from "./routes/notes.routes.js";
+import connectDB from "./config/db.js";
+
+
+dotenv.config();
 connectDB();
-console.log(process.env.MONGO_URI);
+
 const app = express();
 
 // ✅ Parse JSON request body
 app.use(express.json()); // <- this is required
+app.use(cors());
 
 // routes
 app.use("/api/vi", noteRoutes);
